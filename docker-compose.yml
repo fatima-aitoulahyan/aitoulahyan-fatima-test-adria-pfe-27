@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  discovery-service:
+    build: ./discovery-service
+    container_name: discovery-service
+    ports:
+      - "8083:8083"
+    networks:
+      - ebank-net
+
+  gateway-service:
+    build: ./gateway-service
+    container_name: gateway-service
+    ports:
+      - "8084:8084"
+    environment:
+      - SPRING_CLOUD_CONFIG_ENABLED=true
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery-service:8083/eureka/
+    depends_on:
+      - discovery-service
+    networks:
+      - ebank-net
+
+  transaction-service:
+    build: ./transaction-service
+    container_name: transaction-service
+    ports:
+      - "8082:8082"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery-service:8083/eureka/
+    depends_on:
+      - discovery-service
+    networks:
+      - ebank-net
+
+networks:
+  ebank-net:
+    driver: bridge
