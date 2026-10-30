@@ -1,4 +1,4 @@
-package org.example.accountservice.controllers;
+package org.example.accountservice.web.rest.controllers;
 
 import org.example.accountservice.entites.Account;
 import org.example.accountservice.service.AccountService;
