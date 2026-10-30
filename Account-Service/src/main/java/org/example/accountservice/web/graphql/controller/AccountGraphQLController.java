@@ -1,5 +1,6 @@
 package org.example.accountservice.web.graphql.controller;
 
+import org.example.accountservice.DTO.AccountDTO;
 import org.example.accountservice.entites.Account;
 import org.example.accountservice.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class AccountGraphQLController {
 
     }
     @MutationMapping("/accounts")
-    public Account addAcount(@Argument AccountDTO account){
+    public Account addAcount(@Argument Account account){
         return accountService.addAccount(account);
     }
 }
