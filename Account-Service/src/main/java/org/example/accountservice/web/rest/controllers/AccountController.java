@@ -24,5 +24,12 @@ public class AccountController {
     public Account addAcount(@RequestBody Account account){
         return accountService.addAccount(account);
     }
+    @PutMapping("/accounts/{id}/balance")
+    public Account updateBalance(
+            @PathVariable String id,
+            @RequestBody Long newBalance) {
+
+        return accountService.updateBalance(id, newBalance);
+    }
 
 }

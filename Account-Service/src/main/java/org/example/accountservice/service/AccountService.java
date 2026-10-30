@@ -22,6 +22,14 @@ public class AccountService {
     public Account addAccount(Account account){
         return accountRepository.save(account);
     }
+    public Account updateBalance(String id, Long newBalance) {
+
+        Account account = findAccountByd(id);
+
+        account.setBalance(newBalance);
+
+        return accountRepository.save(account);
+    }
 
 
 
